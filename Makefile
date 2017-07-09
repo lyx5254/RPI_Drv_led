@@ -7,13 +7,14 @@ ifeq ($(DEBUG),y)
 else
   DEBFLAGS = -O2
 endif
-EXTRA_CFLAGS  += $(DEBFLAGS) -I$(LDDINCDIR)
+EXTRA_CFLAGS  += $(DEBFLAGS) -I$(LDDINCDIR) -I./procfs
 
 
 ifneq ($(KERNELRELEASE),)
 # call from kernel build system
 
-led-objs := led_driver.o
+led-objs += led_driver.o
+led-objs += procfs/procfs.o
 
 obj-m	:= led.o
 
